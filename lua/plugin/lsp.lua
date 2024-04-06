@@ -12,6 +12,7 @@ return {
                 ensure_installed = {
                     "lua_ls",
                     "pyright",
+                    "rust_analyzer"
                 },
             })
         end,
@@ -23,6 +24,9 @@ return {
             local lspconfig = require("lspconfig")
             lspconfig.lua_ls.setup({ capabilities = capabilities })
             lspconfig.pyright.setup({ capabilities = capabilities })
+            lspconfig.rust_analyzer.setup({ capabilities = capabilities })
+            lspconfig.clangd.setup({ capabilities = capabilities })
+            lspconfig.gopls.setup({ capabilities = capabilities })
         end,
     },
 }

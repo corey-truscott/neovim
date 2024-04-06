@@ -11,8 +11,8 @@ return {
                 null_ls.builtins.formatting.black,
                 null_ls.builtins.formatting.isort,
 
-                -- spelling
-                null_ls.builtins.completion.spell,
+                -- rust, c
+                null_ls.builtins.formatting.ast_grep,
             },
         })
     end,
