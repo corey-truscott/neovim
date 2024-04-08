@@ -42,7 +42,7 @@ return {
 				},
 				window = {
 					-- completion = cmp.config.window.bordered(),
-					documentation = cmp.config.window.bordered(),
+					-- documentation = cmp.config.window.bordered(),
 				},
 				suggest_lsp_servers = false,
 				sign_icons = {
