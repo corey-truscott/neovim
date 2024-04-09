@@ -13,11 +13,7 @@ return {
             local wk = require("which-key")
             local builtin = require("telescope.builtin")
 
-            -- vim.lsp.buf.format
-
             wk.register({
-                -- quit all
-                q = { "<cmd>qa!<cr>", "quit all" },
                 -- lazy
                 L = { vim.cmd.Lazy, "lazy" },
                 -- neotree
@@ -42,8 +38,6 @@ return {
                     f = { builtin.find_files, "find files" },
                     -- find buffers
                     b = { builtin.buffers, "find buffers" },
-                    -- find old files
-                    o = { builtin.oldfiles, "find old files" },
                     -- grep string search
                     s = {
                         function()
@@ -71,6 +65,8 @@ return {
                     j = { "<cmd>Gitsigns next_hunk<cr>", "next hunk" },
                     k = { "<cmd>Gitsigns prev_hunk<cr>", "previous hunk" },
                     b = { "<cmd>Gitsigns toggle_current_line_blame<cr>", "toggle inline blame" },
+
+                    g = { "<cmd>LazyGit<cr>", "lazy git" },
                 }
             }, { prefix = "<leader>" })
         end,
