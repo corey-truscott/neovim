@@ -18,11 +18,9 @@ return {
             wk.register({
                 -- quit all
                 q = { "<cmd>qa!<cr>", "quit all" },
-                -- old session
-                S = { function() require("persistence").load() end, "session restore" },
                 -- lazy
                 L = { vim.cmd.Lazy, "lazy" },
-                -- nvim tree
+                -- neotree
                 e = { "<cmd>Neotree toggle<cr>", "file tree" },
                 -- trouble and todo comments
                 t = {
@@ -66,8 +64,14 @@ return {
                     f = { function() vim.lsp.buf.references() end, "references" },
                     r = { function() vim.lsp.buf.rename() end, "rename" },
                     m = { vim.cmd.Mason, "lsp installer" },
-                    g = { "<cmd>GitSigns preview_hunk_inline<cr>", "preview hunk" },
                 },
+                g = {
+                    name = "git",
+                    p = { "<cmd>Gitsigns preview_hunk<cr>", "preview hunk" },
+                    j = { "<cmd>Gitsigns next_hunk<cr>", "next hunk" },
+                    k = { "<cmd>Gitsigns prev_hunk<cr>", "previous hunk" },
+                    b = { "<cmd>Gitsigns toggle_current_line_blame<cr>", "toggle inline blame" },
+                }
             }, { prefix = "<leader>" })
         end,
     },
