@@ -66,11 +66,8 @@ return {
                     f = { function() vim.lsp.buf.references() end, "references" },
                     r = { function() vim.lsp.buf.rename() end, "rename" },
                     m = { vim.cmd.Mason, "lsp installer" },
+                    g = { "<cmd>GitSigns preview_hunk_inline<cr>", "preview hunk" },
                 },
-                -- open neorg
-                n = {
-                    name = "neorg",
-                }
             }, { prefix = "<leader>" })
         end,
     },
