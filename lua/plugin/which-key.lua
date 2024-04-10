@@ -3,7 +3,7 @@ return {
         "folke/which-key.nvim",
         config = function()
             vim.o.timeout = true
-            vim.o.timeoutlen = 0
+            vim.o.timeoutlen = 300
             require("which-key").setup({
                 presets = {
                     operators = false,
@@ -26,7 +26,7 @@ return {
                     f = { vim.cmd.TodoTelescope, "todo find" },
                 },
                 -- formats (requires formatter installed via :Mason)
-                F = { vim.lsp.buf.format, "format" },
+                f = { vim.lsp.buf.format, "format" },
                 -- makes current file executable
                 x = { "<cmd>!chmod +x %<cr>", "make file executable" },
                 -- undotree
