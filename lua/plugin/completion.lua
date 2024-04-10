@@ -27,6 +27,7 @@ return {
 
 			local luasnip = require("luasnip")
 			local cmp = require("cmp")
+            local lspkind = require("lspkind")
 			require("luasnip.loaders.from_vscode").lazy_load()
 
 			cmp.setup({
@@ -44,6 +45,24 @@ return {
 					-- completion = cmp.config.window.bordered(),
 					-- documentation = cmp.config.window.bordered(),
 				},
+				formatting = {
+					format = lspkind.cmp_format({
+						mode = "symbol_text",
+						menu = {
+							-- buffer = "[Buffer]",
+							-- nvim_lsp = "[LSP]",
+							-- luasnip = "[LuaSnip]",
+							-- nvim_lua = "[Lua]",
+							-- latex_symbols = "[Latex]",
+							buffer = "",
+							nvim_lsp = "",
+							luasnip = "",
+							nvim_lua = "",
+							latex_symbols = "",
+						},
+					}),
+				},
+
 				suggest_lsp_servers = false,
 				sign_icons = {
 					error = "",
