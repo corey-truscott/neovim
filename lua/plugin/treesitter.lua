@@ -7,7 +7,7 @@ return {
         },
     config = function()
         require("nvim-treesitter.configs").setup({
-            -- ensure_installed = { "norg" },
+            ensure_installed = { "comment", "markdown_inline" },
 
             sync_install = false,
             auto_install = true,
