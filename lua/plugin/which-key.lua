@@ -46,7 +46,7 @@ return {
 				p = {
 					name = "telescope",
 					-- find files
-					f = { builtin.find_files, "find files" },
+					v = { builtin.find_files, "find files" },
 					-- find buffers
 					b = { builtin.buffers, "find buffers" },
 					-- grep string search
