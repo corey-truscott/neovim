@@ -14,6 +14,10 @@ return {
                 -- go
                 null_ls.builtins.formatting.gofumpt,
                 null_ls.builtins.formatting.golines,
+
+                -- markdown
+                null_ls.builtins.formatting.cbfmt,
+                null_ls.builtins.formatting.mdformat,
             },
         })
     end,
