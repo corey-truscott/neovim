@@ -10,20 +10,14 @@ return {
         config = function()
             require("mason-lspconfig").setup({
                 ensure_installed = {
-                    -- lsp
                     "lua_ls",
                     "pyright",
                     "rust_analyzer",
                     "clangd",
                     "gopls",
-
-                    -- formatter
-                    -- "stylua",
-                    -- "black",
-                    -- "isort",
-                    -- "gofumpt",
-                    -- "golines",
-                    -- "gci",
+                    "marksman",
+                    "jsonls",
+                    "html",
                 },
             })
         end,
@@ -39,6 +33,7 @@ return {
             lspconfig.clangd.setup({ capabilities = capabilities })
             lspconfig.gopls.setup({ capabilities = capabilities })
             lspconfig.marksman.setup({ capabilities = capabilities })
+            lspconfig.html.setup({ capabilities = capabilities })
         end,
     },
 }
