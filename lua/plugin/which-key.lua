@@ -13,6 +13,7 @@ return {
 			local wk = require("which-key")
 			local builtin = require("telescope.builtin")
 			local harpoon = require("harpoon")
+			local trouble = require("trouble")
 
 			wk.register({
 				-- lazy
@@ -21,7 +22,41 @@ return {
 				e = { "<cmd>Neotree toggle<cr>", "file tree" },
 				-- trouble and todo comments
 				t = {
-					t = { vim.cmd.TroubleToggle, "trouble" },
+					t = {
+						function()
+							trouble.toggle()
+						end,
+						"toggle trouble",
+					},
+
+					n = {
+						function()
+							trouble.next()
+						end,
+						"next trouble item",
+					},
+
+					p = {
+						function()
+							trouble.previous()
+						end,
+						"previous trouble item",
+					},
+
+					N = {
+						function()
+							trouble.next({ skip_groups = true, jump = true })
+						end,
+						"previous trouble item",
+					},
+
+					P = {
+						function()
+							trouble.previous({ skip_groups = true, jump = true })
+						end,
+						"previous trouble item",
+					},
+
 					j = {
 						function()
 							require("todo-comments").jump_next()
@@ -59,12 +94,14 @@ return {
 					ws = {
 						function()
 							builtin.grep_string({ search = vim.fn.expand("<cword>") })
-						end, "search word"
+						end,
+						"search word",
 					},
 					Ws = {
 						function()
 							builtin.grep_string({ search = vim.fn.expand("<cWORD>") })
-						end, "search word (to whitespace)"
+						end,
+						"search word (to whitespace)",
 					},
 				},
 				-- LSP
