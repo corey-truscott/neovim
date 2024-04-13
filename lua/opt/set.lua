@@ -70,3 +70,6 @@ vim.opt.cursorline = true
 
 -- change gutter space
 vim.opt.numberwidth = 4
+
+-- color column on char 80
+vim.opt.colorcolumn = "80"
