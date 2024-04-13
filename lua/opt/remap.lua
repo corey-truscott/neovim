@@ -19,14 +19,8 @@ vim.keymap.set("n", "<C-u>", "<C-u>zz")
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 
--- changes <C-c> to be the same as <Esc>
-vim.keymap.set("i", "<C-c>", "<Esc>")
-
 -- removes the satanic function of Q
 vim.keymap.set("n", "Q", "<nop>")
-
--- formats (requires a formatter to be installed via :Mason)
-vim.keymap.set("n", "<leader>f", vim.lsp.buf.format)
 
 -- search and replace
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
