@@ -205,6 +205,10 @@ return {
 						"select four",
 					},
 				},
+				o = {
+					vim.cmd.Oil,
+					"oil",
+				},
 			}, { prefix = "<leader>" })
 		end,
 	},
