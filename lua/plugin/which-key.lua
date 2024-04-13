@@ -29,41 +29,41 @@ return {
 						"toggle trouble",
 					},
 
-					n = {
+					j = {
 						function()
 							trouble.next()
 						end,
 						"next trouble item",
 					},
 
-					p = {
+					k = {
 						function()
 							trouble.previous()
 						end,
 						"previous trouble item",
 					},
 
-					N = {
+					J = {
 						function()
 							trouble.next({ skip_groups = true, jump = true })
 						end,
 						"previous trouble item",
 					},
 
-					P = {
+					K = {
 						function()
 							trouble.previous({ skip_groups = true, jump = true })
 						end,
 						"previous trouble item",
 					},
 
-					j = {
+					n = {
 						function()
 							require("todo-comments").jump_next()
 						end,
 						"next todo",
 					},
-					k = {
+					p = {
 						function()
 							require("todo-comments").jump_prev()
 						end,
