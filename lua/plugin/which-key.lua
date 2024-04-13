@@ -123,20 +123,20 @@ return {
 						function()
 							vim.diagnostic.open_float()
 						end,
-						"open diagnostic float",
+						"open diagnostic",
 					},
-					j = {
-						function()
-							vim.diagnostic.goto_next()
-						end,
-						"goto next diagnostic",
-					},
-					k = {
-						function()
-							vim.diagnostic.goto_prev()
-						end,
-						"goto previous diagnostic",
-					},
+					-- j = {
+					-- 	function()
+					-- 		vim.diagnostic.goto_next()
+					-- 	end,
+					-- 	"goto next diagnostic",
+					-- },
+					-- k = {
+					-- 	function()
+					-- 		vim.diagnostic.goto_prev()
+					-- 	end,
+					-- 	"goto previous diagnostic",
+					-- },
 					a = {
 						function()
 							vim.lsp.buf.code_action()
