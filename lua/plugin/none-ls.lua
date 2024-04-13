@@ -26,6 +26,9 @@ return {
 
 				-- html, json, js, etc
 				null_ls.builtins.formatting.prettier,
+
+                -- shell
+				null_ls.builtins.formatting.shfmt,
 			},
 		})
 
@@ -40,6 +43,7 @@ return {
 				"mdformat",
 				"stylua",
 				"prettier",
+                "shfmt"
 			},
 		})
 	end,

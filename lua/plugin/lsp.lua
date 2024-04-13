@@ -34,6 +34,7 @@ return {
             lspconfig.gopls.setup({ capabilities = capabilities })
             lspconfig.marksman.setup({ capabilities = capabilities })
             lspconfig.html.setup({ capabilities = capabilities })
+            lspconfig.bashls.setup({ capabilities = capabilities })
         end,
     },
 }
