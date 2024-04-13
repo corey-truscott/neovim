@@ -56,6 +56,16 @@ return {
 						end,
 						"grep string search",
 					},
+					ws = {
+						function()
+							builtin.grep_string({ search = vim.fn.expand("<cword>") })
+						end, "search word"
+					},
+					Ws = {
+						function()
+							builtin.grep_string({ search = vim.fn.expand("<cWORD>") })
+						end, "search word (to whitespace)"
+					},
 				},
 				-- LSP
 				l = {
