@@ -31,7 +31,6 @@ return {
 				null_ls.builtins.formatting.shfmt,
 
                 -- latex
-				null_ls.builtins.formatting.latexindent,
 			},
 		})
 
@@ -47,7 +46,6 @@ return {
 				"stylua",
 				"prettier",
                 "shfmt",
-                "latexindent",
 			},
 		})
 	end,
