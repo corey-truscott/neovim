@@ -18,6 +18,7 @@ return {
                     "marksman",
                     "jsonls",
                     "html",
+                    "ltex",
                 },
             })
         end,
@@ -35,6 +36,7 @@ return {
             lspconfig.marksman.setup({ capabilities = capabilities })
             lspconfig.html.setup({ capabilities = capabilities })
             lspconfig.bashls.setup({ capabilities = capabilities })
+            lspconfig.ltex.setup({ capabilities = capabilities })
         end,
     },
 }

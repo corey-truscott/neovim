@@ -16,6 +16,14 @@ return {
 			local trouble = require("trouble")
 
 			wk.register({
+
+				--#region personal binds
+				C = {
+					"<cmd>!compiler %<cr>",
+					"compile",
+				},
+				--#endregion
+
 				-- lazy
 				L = { vim.cmd.Lazy, "lazy" },
 				-- neotree
@@ -208,6 +216,14 @@ return {
 				o = {
 					vim.cmd.Oil,
 					"oil",
+				},
+				A = {
+					function()
+						local apm = require("vim-apm")
+						apm:setup({})
+						apm:toggle_monitor()
+					end,
+					"actions per minute",
 				},
 			}, { prefix = "<leader>" })
 		end,
