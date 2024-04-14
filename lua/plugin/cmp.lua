@@ -1,14 +1,14 @@
 return {
 	{
 		"hrsh7th/cmp-nvim-lsp",
-		lazy = true,
+        event = 'InsertEnter',
 		dependencies = {
 			"hrsh7th/cmp-calc",
 		},
 	},
 	{
 		"L3MON4D3/LuaSnip",
-		lazy = true,
+        event = 'InsertEnter',
 		dependencies = {
 			"saadparwaiz1/cmp_luasnip",
 			"rafamadriz/friendly-snippets",
@@ -16,7 +16,7 @@ return {
 	},
 	{
 		"hrsh7th/nvim-cmp",
-		event = { "BufReadPre", "BufNewFile" },
+        event = 'InsertEnter',
 		config = function()
 			local has_words_before = function()
 				unpack = unpack or table.unpack
@@ -27,7 +27,7 @@ return {
 
 			local luasnip = require("luasnip")
 			local cmp = require("cmp")
-            local lspkind = require("lspkind")
+			local lspkind = require("lspkind")
 			require("luasnip.loaders.from_vscode").lazy_load()
 
 			cmp.setup({
@@ -79,25 +79,14 @@ return {
 					["<C-e>"] = cmp.mapping.abort(),
 					["<CR>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
 
-					["<C-j>"] = cmp.mapping(function(fallback)
-						if cmp.visible() then
-							cmp.select_next_item()
-						elseif luasnip.expand_or_jumpable() then
-							luasnip.expand_or_locally_jump()
-						elseif has_words_before() then
-							cmp.complete()
-						else
-							fallback()
+					["<C-j>"] = cmp.mapping(function()
+						if luasnip.expand_or_locally_jumpable() then
+							luasnip.expand_or_jump()
 						end
 					end, { "i", "s" }),
-
-					["<C-k>"] = cmp.mapping(function(fallback)
-						if cmp.visible() then
-							cmp.select_prev_item()
-						elseif luasnip.jumpable(-1) then
+					["<C-k>"] = cmp.mapping(function()
+						if luasnip.locally_jumpable(-1) then
 							luasnip.jump(-1)
-						else
-							fallback()
 						end
 					end, { "i", "s" }),
 				}),

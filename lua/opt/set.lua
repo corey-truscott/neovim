@@ -73,3 +73,12 @@ vim.opt.numberwidth = 4
 
 -- color column on char 80
 vim.opt.colorcolumn = "80"
+
+-- flash text that gets yanked
+vim.api.nvim_create_autocmd('TextYankPost', {
+  desc = 'Highlight when yanking (copying) text',
+  group = vim.api.nvim_create_augroup('highlight-yank', { clear = true }),
+  callback = function()
+    vim.highlight.on_yank()
+  end,
+})

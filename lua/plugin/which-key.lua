@@ -1,6 +1,7 @@
 return {
 	{
 		"folke/which-key.nvim",
+        event = 'VimEnter',
 		config = function()
 			vim.o.timeout = true
 			vim.o.timeoutlen = 300
@@ -19,8 +20,14 @@ return {
 
 				--#region personal binds
 				C = {
-					"<cmd>!compiler %<cr>",
-					"compile",
+					C = {
+						"<cmd>w<cr> <cmd>!compiler %<cr>",
+						"compile",
+					},
+					d = {
+						"<cmd>r!cat ~/.local/bin/latexDefaults<cr>",
+						"copy defaults",
+					},
 				},
 				--#endregion
 
@@ -39,14 +46,14 @@ return {
 
 					j = {
 						function()
-							trouble.next()
+							trouble.next({})
 						end,
 						"next trouble item",
 					},
 
 					k = {
 						function()
-							trouble.previous()
+							trouble.previous({})
 						end,
 						"previous trouble item",
 					},
