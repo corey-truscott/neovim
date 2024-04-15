@@ -14,12 +14,8 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 -- require options
-require("opt")
-
--- lazy options
-local opts = {
-    -- nothing here yet
-}
+require("opt.remap")
+require("opt.set")
 
 -- start lazy
-require("lazy").setup("plugin", opts)
+require("lazy").setup("plugin", {})
