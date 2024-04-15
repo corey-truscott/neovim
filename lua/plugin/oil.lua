@@ -3,6 +3,6 @@ return {
 
 	config = function()
 		require("oil").setup({})
-        vim.keymap.set("n", "<leader>o", "<cmd>Oil<cr>", { desc = "Oil" })
+		vim.keymap.set("n", "<leader>o", "<cmd>Oil<cr>", { desc = "Oil" })
 	end,
 }

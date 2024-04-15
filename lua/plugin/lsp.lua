@@ -1,3 +1,25 @@
+local servers = {
+	"clangd",
+	"gopls",
+	"html",
+	"jsonls",
+	"marksman",
+	"pyright",
+	"rust_analyzer",
+	"lua_ls",
+}
+
+local formatters = {
+	"stylua",
+	"black",
+	"cbfmt",
+	"gofumpt",
+	"golines",
+	"isort",
+	"mdformat",
+	"shfmt",
+}
+
 return {
 	{
 		"neovim/nvim-lspconfig",
@@ -78,20 +100,14 @@ return {
 			local capabilities = vim.lsp.protocol.make_client_capabilities()
 			capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
 
-			-- lsp's are defined here
-			local servers = {
-				clangd = {},
-				gopls = {},
-				html = {},
-				jsonls = {},
-				marksman = {},
-				pyright = {},
-				rust_analyzer = {},
-				lua_ls = {},
-			}
-
 			require("mason").setup()
-			local ensure_installed = vim.tbl_keys(servers or {})
+			local servers_kv = {}
+			for _, server in ipairs(servers) do
+				servers_kv[#servers_kv + 1] = string.format("%s = {}", server)
+			end
+
+			local servers_code = table.concat(servers_kv, "\n")
+			local ensure_installed = vim.tbl_keys(loadstring(servers_code)() or {})
 			vim.list_extend(ensure_installed, formatters or {})
 			require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 
@@ -111,18 +127,6 @@ return {
 		event = { "BufReadPre", "BufNewFile" },
 		config = function()
 			vim.keymap.set("n", "<leader>f", vim.lsp.buf.format, { desc = "Format" })
-
-			-- formatters are defined here
-			local formatters = {
-				"stylua",
-				"black",
-				"cbfmt",
-				"gofumpt",
-				"golines",
-				"isort",
-				"mdformat",
-				"shfmt",
-			}
 
 			local null_ls = require("null-ls")
 
