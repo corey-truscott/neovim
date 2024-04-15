@@ -1,3 +1,7 @@
 return {
-    "mbbill/undotree", event = { "BufReadPre", "BufNewFile" }
+    "mbbill/undotree",
+    event = { "VimEnter" },
+    config = function ()
+        vim.keymap.set("n", "<leader>u", "<cmd>UndotreeToggle<cr>", { desc = "Undotree" })
+    end
 }

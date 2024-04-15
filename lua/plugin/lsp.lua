@@ -1,54 +1,143 @@
+local servers = {
+	"clangd",
+	"gopls",
+	"html",
+	"jsonls",
+	"marksman",
+	"pyright",
+	"rust_analyzer",
+	"lua_ls",
+}
+
+local formatters = {
+	"stylua",
+	"black",
+	"cbfmt",
+	"gofumpt",
+	"golines",
+	"isort",
+	"mdformat",
+	"shfmt",
+}
+
 return {
 	{
-		"williamboman/mason.nvim",
+		"neovim/nvim-lspconfig",
+		dependencies = {
+			"williamboman/mason.nvim",
+			"williamboman/mason-lspconfig.nvim",
+			"WhoIsSethDaniel/mason-tool-installer.nvim",
+			{
+				"j-hui/fidget.nvim",
+				opts = {},
+			},
+			{
+				"folke/neodev.nvim",
+				opts = {},
+			},
+		},
+
 		config = function()
+			vim.api.nvim_create_autocmd("LspAttach", {
+				group = vim.api.nvim_create_augroup("lsp-attach", { clear = true }),
+				callback = function(event)
+					-- helper function for mapping keybinds
+					local map = function(keys, func, desc)
+						vim.keymap.set("n", keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
+					end
+
+					map("gd", function()
+						vim.lsp.buf.definition()
+					end, "Goto Definition")
+
+					map("gr", function()
+						vim.lsp.buf.references()
+					end, "Goto References")
+
+					map("gI", function()
+						vim.lsp.buf.implementation()
+					end, "Goto Implementation")
+					map("<leader>D", function()
+						vim.lsp.buf.lsp_type_definition()
+					end, "Type Definition")
+
+					map("<leader>ds", function()
+						vim.lsp.buf.document_symbol()
+					end, "Document Symbols")
+
+					map("<leader>rn", function()
+						vim.lsp.buf.rename()
+					end, "Rename")
+
+					map("<leader>ca", function()
+						vim.lsp.buf.code_action()
+					end, "Code Action")
+
+					map("K", function()
+						vim.lsp.buf.hover()
+					end, "Hover Documentation")
+
+					map("gD", function()
+						vim.lsp.buf.declaration()
+					end, "Goto Declaration") -- WARN: this is different to goto definition, this is goto declaration
+
+					-- highlights word under cursor
+					local client = vim.lsp.get_client_by_id(event.data.client_id)
+					if client and client.server_capabilities.documentHighlightProvider then
+						vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+							buffer = event.buf,
+							callback = vim.lsp.buf.document_highlight,
+						})
+
+						vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
+							buffer = event.buf,
+							callback = vim.lsp.buf.clear_references,
+						})
+					end
+				end,
+			})
+
+			local capabilities = vim.lsp.protocol.make_client_capabilities()
+			capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
+
 			require("mason").setup()
-		end,
-	},
-	{
-		"williamboman/mason-lspconfig.nvim",
-		config = function()
+			local servers_kv = {}
+			for _, server in ipairs(servers) do
+				servers_kv[#servers_kv + 1] = string.format("%s = {}", server)
+			end
+
+			local servers_code = table.concat(servers_kv, "\n")
+			local ensure_installed = vim.tbl_keys(loadstring(servers_code)() or {})
+			vim.list_extend(ensure_installed, formatters or {})
+			require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
+
 			require("mason-lspconfig").setup({
-				ensure_installed = {
-					"lua_ls",
-					"pyright",
-					"rust_analyzer",
-					"clangd",
-					"gopls",
-					"marksman",
-					"jsonls",
-					"html",
-					"ltex",
+				handlers = {
+					function(server_name)
+						local server = servers[server_name] or {}
+						server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
+						require("lspconfig")[server_name].setup(server)
+					end,
 				},
 			})
 		end,
 	},
 	{
-		"neovim/nvim-lspconfig",
+		"nvimtools/none-ls.nvim",
+		event = { "BufReadPre", "BufNewFile" },
 		config = function()
-			local lspconfig = require("lspconfig")
-			lspconfig.lua_ls.setup({})
-			lspconfig.pyright.setup({})
-			lspconfig.rust_analyzer.setup({})
-			lspconfig.clangd.setup({})
-			lspconfig.gopls.setup({})
-			lspconfig.marksman.setup({})
-			lspconfig.html.setup({})
-			lspconfig.bashls.setup({})
-			lspconfig.ltex.setup({})
+			vim.keymap.set("n", "<leader>f", vim.lsp.buf.format, { desc = "Format" })
+
+			local null_ls = require("null-ls")
+
+			local sources = {}
+			for _, formatter in ipairs(formatters) do
+				sources[#sources + 1] = null_ls.builtins.formatting[formatter]
+			end
+
+			null_ls.setup({
+				sources = sources or {},
+			})
 		end,
-		-- config = function()
-		--     local capabilities = require("cmp_nvim_lsp").default_capabilities()
-		--     local lspconfig = require("lspconfig")
-		--     lspconfig.lua_ls.setup({ capabilities = capabilities })
-		--     lspconfig.pyright.setup({ capabilities = capabilities })
-		--     lspconfig.rust_analyzer.setup({ capabilities = capabilities })
-		--     lspconfig.clangd.setup({ capabilities = capabilities })
-		--     lspconfig.gopls.setup({ capabilities = capabilities })
-		--     lspconfig.marksman.setup({ capabilities = capabilities })
-		--     lspconfig.html.setup({ capabilities = capabilities })
-		--     lspconfig.bashls.setup({ capabilities = capabilities })
-		--     lspconfig.ltex.setup({ capabilities = capabilities })
-		-- end,
 	},
 }

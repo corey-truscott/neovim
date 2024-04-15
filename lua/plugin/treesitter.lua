@@ -1,29 +1,28 @@
-return {
+return { -- Highlight, edit, and navigate code
 	"nvim-treesitter/nvim-treesitter",
 	event = { "BufReadPost", "BufNewFile" },
-	version = false,
+	build = ":TSUpdate",
 	dependencies = {
-		"JoosepAlviste/nvim-ts-context-commentstring",
-		"windwp/nvim-ts-autotag",
+		{
+			"JoosepAlviste/nvim-ts-context-commentstring",
+			opts = {},
+		},
+		{
+			"windwp/nvim-ts-autotag",
+			opts = {},
+		},
 	},
-	config = function()
-		require("nvim-ts-autotag").setup()
-		require("nvim-treesitter.configs").setup({
-			ensure_installed = { "comment", "markdown_inline" },
-
-			sync_install = false,
-			auto_install = true,
-
-			highlight = {
-				enable = true,
-				additional_vim_regex_highlighting = false,
-			},
-			indent = {
-				enable = true,
-			},
-			autotag = {
-				enable = true,
-			},
-		})
+	opts = {
+		ensure_installed = { "comment", "markdown_inline" },
+		auto_install = true,
+		highlight = {
+			enable = true,
+			additional_vim_regex_highlighting = { "ruby" },
+		},
+		indent = { enable = true, disable = { "ruby" } },
+	},
+	config = function(_, opts)
+		---@diagnostic disable-next-line: missing-fields
+		require("nvim-treesitter.configs").setup(opts)
 	end,
 }

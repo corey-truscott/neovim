@@ -1,13 +1,7 @@
 return {
-    "sainnhe/everforest",
-    priority = 1000,
-    config = function()
-        vim.cmd [[
-        let g:everforest_background = 'hard'
-        let g:everforest_better_performance = 1
-        ]]
-
-        Colour = Colour or "everforest"
-        vim.cmd.colorscheme(Colour)
-    end,
+	"sainnhe/everforest",
+	priority = 1000,
+	init = function()
+		vim.cmd.colorscheme("everforest")
+	end,
 }
