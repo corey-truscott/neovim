@@ -1,12 +1,12 @@
 local servers = {
-	"clangd",
-	"gopls",
-	"html",
-	"jsonls",
-	"marksman",
-	"pyright",
-	"rust_analyzer",
-	"lua_ls",
+	clangd = {},
+	gopls = {},
+	html = {},
+	jsonls = {},
+	marksman = {},
+	pyright = {},
+	rust_analyzer = {},
+	lua_ls = {},
 }
 
 local formatters = {
@@ -101,13 +101,7 @@ return {
 			capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
 
 			require("mason").setup()
-			local servers_kv = {}
-			for _, server in ipairs(servers) do
-				servers_kv[#servers_kv + 1] = string.format("%s = {}", server)
-			end
-
-			local servers_code = table.concat(servers_kv, "\n")
-			local ensure_installed = vim.tbl_keys(loadstring(servers_code)() or {})
+			local ensure_installed = vim.tbl_keys(servers or {})
 			vim.list_extend(ensure_installed, formatters or {})
 			require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 
