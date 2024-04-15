@@ -1,8 +1,10 @@
 -- adds relativenumber lines on the side
-vim.opt.nu = true
+-- setting number and relative number means that the real line number isdst
+-- displayed for the line you are on
+vim.opt.number = true
 vim.opt.relativenumber = true
 
--- changes tabs to 2 spaces
+-- changes tabs to 4 spaces
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
@@ -22,7 +24,7 @@ vim.opt.undodir = os.getenv("HOME") .. "/.config/nvim/undodir"
 vim.opt.undofile = true
 
 -- adds highlighted search, incremental search, and removes case sensetive search
-vim.opt.hlsearch = false
+vim.opt.hlsearch = true
 vim.opt.incsearch = true
 vim.opt.ignorecase = true
 
@@ -33,7 +35,7 @@ vim.opt.termguicolors = true
 vim.opt.scrolloff = 8
 vim.opt.sidescrolloff = 8
 
--- enables signcolumn (i believe this is for lsp?)
+-- enables signcolumn
 vim.opt.signcolumn = "yes"
 
 -- recognise file name
@@ -71,8 +73,14 @@ vim.opt.cursorline = true
 -- change gutter space
 vim.opt.numberwidth = 4
 
+-- enable break indent
+vim.opt.breakindent = true
+
 -- color column on char 80
 vim.opt.colorcolumn = "80"
+
+-- preview substitution
+vim.opt.inccommand = 'split'
 
 -- flash text that gets yanked
 vim.api.nvim_create_autocmd('TextYankPost', {

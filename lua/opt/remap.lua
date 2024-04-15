@@ -1,8 +1,7 @@
 -- map leader
+-- must happen *before* plugins are loaded
 vim.g.mapleader = " "
-
--- toggles file tree
---[[ vim.keymap.set("n", "<leader>e", vim.cmd.NvimTreeToggle) ]]
+vim.g.maplocalleader = " "
 
 -- allows lines to be moved in visual mode
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
@@ -19,8 +18,8 @@ vim.keymap.set("n", "<C-u>", "<C-u>zz")
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 
--- removes the satanic function of Q
-vim.keymap.set("n", "Q", "<nop>")
+-- change Q to make lines equal
+vim.keymap.set("n", "Q", "gql")
 
 -- search and replace
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
@@ -33,3 +32,6 @@ vim.keymap.set("n", "<C-h>", "<cmd>wincmd h<CR>")
 vim.keymap.set("n", "<C-j>", "<cmd>wincmd j<CR>")
 vim.keymap.set("n", "<C-k>", "<cmd>wincmd k<CR>")
 vim.keymap.set("n", "<C-l>", "<cmd>wincmd l<CR>")
+
+-- clear highlight search on escsape
+vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
