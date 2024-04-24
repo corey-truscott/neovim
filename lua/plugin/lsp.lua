@@ -29,7 +29,7 @@ return {
 			"WhoIsSethDaniel/mason-tool-installer.nvim",
 			{
 				"j-hui/fidget.nvim",
-				opts = {},
+                opts = {},
 			},
 			{
 				"folke/neodev.nvim",
