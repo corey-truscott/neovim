@@ -1,11 +1,15 @@
 return {
 	"folke/trouble.nvim",
-	event = { "VimEnter" },
+	cmd = "Trouble",
 	dependencies = { "nvim-tree/nvim-web-devicons" },
 	opts = {},
-	config = function()
-		vim.keymap.set("n", "<leader>tt", function()
-			require("trouble").toggle()
-		end, { desc = "Toggle diagnosics" })
-	end,
+	keys = {
+		{
+			"<leader>tt",
+			function()
+				require("trouble").toggle()
+			end,
+			desc = "Trouble",
+		},
+	},
 }

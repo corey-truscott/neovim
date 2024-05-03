@@ -1,29 +1,65 @@
 return {
 	"nvim-telescope/telescope.nvim",
-	event = "VimEnter",
+	cmd = "Telescope",
 	branch = "0.1.x",
 	dependencies = {
 		"nvim-lua/plenary.nvim",
 		{ "nvim-telescope/telescope-ui-select.nvim" },
 		{ "nvim-tree/nvim-web-devicons" },
 	},
-	config = function()
-		require("telescope").setup({
-			extensions = {
-				["ui-select"] = {
-					require("telescope.themes").get_dropdown(),
-				},
-			},
-		})
-		pcall(require("telescope").load_extension, "ui-select")
-
-		-- see `:help telescope.builtin`
-		local builtin = require("telescope.builtin")
-		vim.keymap.set("n", "<leader>pv", builtin.find_files, { desc = "Search Files" })
-		vim.keymap.set("n", "<leader>ps", builtin.live_grep, { desc = "Search by Grep" })
-		vim.keymap.set("n", "<leader>pb", builtin.buffers, { desc = "Find existing buffers" })
-		vim.keymap.set("n", "<leader>ph", builtin.help_tags, { desc = "Search Help" })
-		vim.keymap.set("n", "<leader>pk", builtin.keymaps, { desc = "Search Keymaps" })
-		vim.keymap.set("n", "<leader>pr", builtin.oldfiles, { desc = "Search Recent Files" })
-	end,
+    opts = {},
+    -- TODO: add keybinding for live grep across project, maybe a bind like p*
+    -- TODO: add descriptions
+	keys = {
+		{
+			"<leader>p*",
+			function()
+				require("telescope.builtin").find_files()
+			end,
+			desc = "DESCRIPTION",
+		},
+		{
+			"<leader>pv",
+			function()
+				require("telescope.builtin").find_files()
+			end,
+			desc = "DESCRIPTION",
+		},
+		{
+			"<leader>ps",
+			function()
+				require("telescope.builtin").live_grep()
+			end,
+			desc = "DESCRIPTION",
+		},
+		{
+			"<leader>pb",
+			function()
+				require("telescope.builtin").buffers()
+			end,
+			desc = "DESCRIPTION",
+		},
+		{
+			"<leader>ph",
+			function()
+				require("telescope.builtin").help_tags()
+			end,
+			desc = "DESCRIPTION",
+		},
+		{
+			"<leader>pk",
+			function()
+				require("telescope.builtin").keymaps()
+			end,
+			desc = "DESCRIPTION",
+		},
+		{
+			"<leader>pr",
+			function()
+				require("telescope.builtin").oldfiles()
+			end,
+			desc = "DESCRIPTION",
+		},
+		{ "<leader>pt", "<cmd>TodoTelescope<cr>", desc = "Search Todo comments" },
+	},
 }

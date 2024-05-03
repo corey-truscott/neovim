@@ -1,23 +1,23 @@
 return {
 	"echasnovski/mini.surround",
 	version = "*",
-
-	config = function()
-		require("mini.surround").setup({
-			custom_surroundings = nil,
-
-			highlight_duration = 500,
+	opts = {
+		{
+			highlight_duration = 100,
 
 			mappings = {
-				add = "ca",
-				delete = "cd",
-				replace = "cs",
-			},
+				add = "sa",
+				delete = "sd",
+				find = "sf",
+				find_left = "sF",
+				highlight = "sh",
+				replace = "sr",
+				update_n_lines = "sn",
 
-			n_lines = 30,
-			respect_selection_type = false,
-			search_method = "cover",
+				suffix_last = "l",
+				suffix_next = "n",
+			},
 			silent = false,
-		})
-	end,
+		},
+	},
 }

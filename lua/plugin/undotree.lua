@@ -1,7 +1,14 @@
 return {
-    "mbbill/undotree",
-    event = { "VimEnter" },
-    config = function ()
-        vim.keymap.set("n", "<leader>u", "<cmd>UndotreeToggle<cr>", { desc = "Undotree" })
-    end
+	"jiaoshijie/undotree",
+    lazy = true,
+	config = true,
+	keys = {
+		-- { "<leader>u", "<cmd>lua require('undotree').toggle()<cr>" },
+		{
+			"<leader>u",
+			function()
+				require("undotree").toggle()
+			end,
+		},
+	},
 }

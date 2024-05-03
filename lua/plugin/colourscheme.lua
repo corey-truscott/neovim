@@ -1,15 +1,7 @@
 return {
-    {
-        "sainnhe/everforest",
-        priority = 1000,
-        init = function()
-            vim.cmd.colorscheme("everforest")
-        end,
-    },
-    {
-        "xiyaowong/transparent.nvim",
-        config = function()
-            require("transparent").setup({})
-        end,
-    },
+	"EdenEast/nightfox.nvim",
+	priority = 1000,
+	init = function()
+		vim.cmd.colorscheme("carbonfox")
+	end,
 }

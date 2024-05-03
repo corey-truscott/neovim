@@ -1,16 +1,31 @@
 return {
 	"folke/todo-comments.nvim",
+    cmd = { "TodoTrouble", "TodoTelescope" },
 	dependencies = { "nvim-lua/plenary.nvim" },
-	config = function()
-		require("todo-comments").setup()
-		local todo = require("todo-comments")
-
-		vim.keymap.set("n", "<leader>tn", function()
-			todo.jump_next()
-		end, { desc = "Next todo comment" })
-		vim.keymap.set("n", "<leader>tp", function()
-			todo.jump_prev()
-		end, { desc = "Previous todo comment" })
-		vim.keymap.set("n", "<leader>tf", "<cmd>TodoQuickFix<cr>", { desc = "Quickfix list of todo comments" })
-	end,
+	opts = {},
+	keys = {
+		{
+			"<leader>tn",
+			function()
+				require("todo-comments").jump_next()
+			end,
+			desc = "Next todo comment",
+		},
+		{
+			"<leader>tp",
+			function()
+				require("todo-comments").jump_prev()
+			end,
+			desc = "Previous todo comment",
+		},
+		{
+			"<leader>tn",
+			function()
+				require("todo-comments").quic()
+			end,
+			-- TODO: test
+			desc = "Next todo comment",
+		},
+		{ "<leader>tt", "<cmd>TodoTrouble<cr>", desc = "Todo Comments" },
+	},
 }
