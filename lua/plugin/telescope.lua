@@ -16,50 +16,57 @@ return {
 			function()
 				require("telescope.builtin").find_files()
 			end,
-			desc = "DESCRIPTION",
+			desc = "WIP",
 		},
 		{
 			"<leader>pv",
 			function()
 				require("telescope.builtin").find_files()
 			end,
-			desc = "DESCRIPTION",
+			desc = "Find files",
 		},
 		{
 			"<leader>ps",
 			function()
 				require("telescope.builtin").live_grep()
 			end,
-			desc = "DESCRIPTION",
+			desc = "Live grep",
 		},
 		{
 			"<leader>pb",
 			function()
 				require("telescope.builtin").buffers()
 			end,
-			desc = "DESCRIPTION",
+			desc = "Search buffers",
 		},
 		{
 			"<leader>ph",
 			function()
 				require("telescope.builtin").help_tags()
 			end,
-			desc = "DESCRIPTION",
+			desc = "Search help pages",
 		},
 		{
 			"<leader>pk",
 			function()
 				require("telescope.builtin").keymaps()
 			end,
-			desc = "DESCRIPTION",
+            desc = "Search keymaps",
 		},
 		{
 			"<leader>pr",
 			function()
 				require("telescope.builtin").oldfiles()
 			end,
-			desc = "DESCRIPTION",
+			desc = "Search old files",
 		},
+        {
+            "<leader>p*",
+            function ()
+                require("telescope.builtin").grep_string({ search = vim.fn.expand("<cword>") })
+            end,
+            desc = "Search word under cursor"
+        },
 		{ "<leader>pt", "<cmd>TodoTelescope<cr>", desc = "Search Todo comments" },
 	},
 }

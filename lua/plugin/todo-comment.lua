@@ -23,9 +23,8 @@ return {
 			function()
 				require("todo-comments").quic()
 			end,
-			-- TODO: test
 			desc = "Next todo comment",
 		},
-		{ "<leader>tt", "<cmd>TodoTrouble<cr>", desc = "Todo Comments" },
+		{ "<leader>tf", "<cmd>TodoTrouble<cr>", desc = "Todo Comments" },
 	},
 }
