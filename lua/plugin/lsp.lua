@@ -1,23 +1,31 @@
+--
+-- if you want to ensure lsp servers or formatters are installed, you can
+-- list them here. Just follow how they are formatted.
+--
+-- otherwise, use :Mason or :MasonInstall to install them, but they wont
+-- carry over if you copy your configuration to another computer.
+--
+
 local servers = {
-	clangd = {},
-	gopls = {},
-	html = {},
-	jsonls = {},
-	marksman = {},
-	pyright = {},
-	rust_analyzer = {},
-	lua_ls = {},
+	-- clangd = {},
+	-- gopls = {},
+	-- html = {},
+	-- jsonls = {},
+	-- marksman = {},
+	-- pyright = {},
+	-- rust_analyzer = {},
+	-- lua_ls = {},
 }
 
 local formatters = {
-	"stylua",
-	"black",
-	"cbfmt",
-	"gofumpt",
-	"golines",
-	"isort",
-	"mdformat",
-	"shfmt",
+	-- "stylua",
+	-- "black",
+	-- "cbfmt",
+	-- "gofumpt",
+	-- "golines",
+	-- "isort",
+	-- "mdformat",
+	-- "shfmt",
 }
 
 return {
