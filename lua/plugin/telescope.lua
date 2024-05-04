@@ -8,8 +8,6 @@ return {
 		{ "nvim-tree/nvim-web-devicons" },
 	},
     opts = {},
-    -- TODO: add keybinding for live grep across project, maybe a bind like p*
-    -- TODO: add descriptions
 	keys = {
 		{
 			"<leader>p*",
