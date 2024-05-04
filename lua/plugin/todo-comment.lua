@@ -1,30 +1,23 @@
 return {
-	"folke/todo-comments.nvim",
+    "folke/todo-comments.nvim",
     cmd = { "TodoTrouble", "TodoTelescope" },
-	dependencies = { "nvim-lua/plenary.nvim" },
-	opts = {},
-	keys = {
-		{
-			"<leader>tn",
-			function()
-				require("todo-comments").jump_next()
-			end,
-			desc = "Next todo comment",
-		},
-		{
-			"<leader>tp",
-			function()
-				require("todo-comments").jump_prev()
-			end,
-			desc = "Previous todo comment",
-		},
-		{
-			"<leader>tn",
-			function()
-				require("todo-comments").quic()
-			end,
-			desc = "Next todo comment",
-		},
-		{ "<leader>tf", "<cmd>TodoTrouble<cr>", desc = "Todo Comments" },
-	},
+    event = { "BufReadPost", "BufWritePost", "BufNewFile" },
+    config = true,
+    keys = {
+        {
+            "<leader>tn",
+            function()
+                require("todo-comments").jump_next()
+            end,
+            desc = "Next Todo Comment",
+        },
+        {
+            "<leader>tp",
+            function()
+                require("todo-comments").jump_prev()
+            end,
+            desc = "Previous Todo Comment",
+        },
+        { "<leader>tf", "<cmd>TodoTrouble<cr>", desc = "Todo (Trouble)" },
+    },
 }
