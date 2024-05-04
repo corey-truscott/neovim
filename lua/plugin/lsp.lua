@@ -54,54 +54,42 @@ return {
                         vim.keymap.set("n", keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
                     end
 
-                    map("<leader>M",
-                        "<cmd>Mason<cr>",
-                        "Mason"
-                    )
+                    map("<leader>M", "<cmd>Mason<cr>", "Mason")
 
                     map("gd", function()
                         vim.lsp.buf.definition()
-                    end, "Goto Definition"
-                    )
+                    end, "Goto Definition")
 
                     map("gr", function()
                         vim.lsp.buf.references()
-                    end, "Goto References"
-                    )
+                    end, "Goto References")
 
                     map("gI", function()
                         vim.lsp.buf.implementation()
-                    end, "Goto Implementation"
-                    )
+                    end, "Goto Implementation")
                     map("<leader>D", function()
                         vim.lsp.buf.lsp_type_definition()
-                    end, "Type Definition"
-                    )
+                    end, "Type Definition")
 
                     map("<leader>ds", function()
                         vim.lsp.buf.document_symbol()
-                    end, "Document Symbols"
-                    )
+                    end, "Document Symbols")
 
                     map("<leader>rn", function()
                         vim.lsp.buf.rename()
-                    end, "Rename"
-                    )
+                    end, "Rename")
 
                     map("<leader>ca", function()
                         vim.lsp.buf.code_action()
-                    end, "Code Action"
-                    )
+                    end, "Code Action")
 
                     map("K", function()
                         vim.lsp.buf.hover()
-                    end, "Hover Documentation"
-                    )
+                    end, "Hover Documentation")
 
                     map("gD", function()
                         vim.lsp.buf.declaration()
-                    end, "Goto Declaration"
-                    ) -- WARN: this is different to goto definition, this is goto declaration
+                    end, "Goto Declaration") -- WARN: this is different to goto definition, this is goto declaration
                 end,
             })
 
@@ -125,21 +113,32 @@ return {
         end,
     },
     {
-        "nvimtools/none-ls.nvim",
-        event = { "BufReadPre", "BufNewFile" },
-        config = function()
-            vim.keymap.set("n", "<leader>f", vim.lsp.buf.format, { desc = "Format" })
+        "jay-babu/mason-null-ls.nvim",
+        event = { "BufReadPost", "BufNewFile" },
+        keys = {
+            {
+                "<leader>f",
+                function()
+                    vim.lsp.buf.format()
+                end,
+                desc = "Format",
+            },
+        },
+        opts = {
+            automatic_installation = false,
+            handlers = {},
+        },
+        dependencies = {
+            {
+                "nvimtools/none-ls.nvim",
 
-            local null_ls = require("null-ls")
+                opts = {
+                    sources = {
+                        -- Anything not supported by mason.
+                    }
+                }
+            },
+        },
 
-            local sources = {}
-            for _, formatter in ipairs(formatters) do
-                sources[#sources + 1] = null_ls.builtins.formatting[formatter]
-            end
-
-            null_ls.setup({
-                sources = sources or {},
-            })
-        end,
     },
 }
