@@ -116,7 +116,7 @@ return {
     },
     {
         "jay-babu/mason-null-ls.nvim",
-        event = { "BufReadPost", "BufNewFile" },
+        event = { "BufReadPost", "BufWritePost", "BufNewFile" },
         keys = {
             {
                 "<leader>f",

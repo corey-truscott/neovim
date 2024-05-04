@@ -1,14 +1,16 @@
 return { -- Highlight, edit, and navigate code
 	"nvim-treesitter/nvim-treesitter",
-	event = { "BufReadPost", "BufNewFile" },
+    event = { "BufReadPost", "BufWritePost", "BufNewFile" },
 	build = ":TSUpdate",
 	dependencies = {
 		{
 			"JoosepAlviste/nvim-ts-context-commentstring",
+            lazy = true,
 			opts = {},
 		},
 		{
 			"windwp/nvim-ts-autotag",
+            event = { "BufReadPost", "BufWritePost", "BufNewFile" },
 			opts = {},
 		},
 	},
