@@ -32,7 +32,7 @@ vim.opt.ignorecase = true
 vim.opt.termguicolors = true
 
 -- scrolloff
-vim.opt.scrolloff = 8
+vim.opt.scrolloff = 4
 vim.opt.sidescrolloff = 8
 
 -- enables signcolumn
