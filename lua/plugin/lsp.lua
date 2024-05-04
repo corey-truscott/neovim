@@ -34,7 +34,11 @@ return {
         dependencies = {
             "williamboman/mason.nvim",
             "williamboman/mason-lspconfig.nvim",
-            "WhoIsSethDaniel/mason-tool-installer.nvim",
+            {
+                "WhoIsSethDaniel/mason-tool-installer.nvim",
+                lazy = true,
+            },
+
             {
                 "folke/neodev.nvim",
                 opts = {},
@@ -93,9 +97,11 @@ return {
             capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
 
             require("mason").setup()
-            local ensure_installed = vim.tbl_keys(servers or {})
-            vim.list_extend(ensure_installed, formatters or {})
-            require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
+            if next(servers) ~= nil then
+                local ensure_installed = vim.tbl_keys(servers or {})
+                vim.list_extend(ensure_installed, formatters or {})
+                require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
+            end
 
             require("mason-lspconfig").setup({
                 handlers = {
@@ -130,7 +136,7 @@ return {
 
                 opts = {
                     sources = {
-                        -- Anything not supported by mason.
+                        -- anything not supported by mason.
                     }
                 }
             },
