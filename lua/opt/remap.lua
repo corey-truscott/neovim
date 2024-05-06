@@ -10,9 +10,13 @@ vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 -- join keeps you at the same place in the line
 vim.keymap.set("n", "J", "mzJ`z")
 
--- centers vim when going up/down a page
+-- centers vim when going up/down a half page
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
+
+-- centers vim when going up/down a page
+vim.keymap.set("n", "<C-f>", "<C-f>zz")
+vim.keymap.set("n", "<C-b>", "<C-b>zz")
 
 -- centers vim when going next/previous in a list
 vim.keymap.set("n", "n", "nzzzv")
