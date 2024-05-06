@@ -10,13 +10,6 @@ return {
     opts = {},
 	keys = {
 		{
-			"<leader>p*",
-			function()
-				require("telescope.builtin").find_files()
-			end,
-			desc = "WIP",
-		},
-		{
 			"<leader>pv",
 			function()
 				require("telescope.builtin").find_files()
