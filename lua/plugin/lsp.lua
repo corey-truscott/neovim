@@ -87,6 +87,10 @@ return {
                         vim.lsp.buf.hover()
                     end, "Hover Documentation")
 
+                    map("<C-h>", function()
+                        vim.lsp.buf.signature_help()
+                    end, "Signature help")
+
                     map("gD", function()
                         vim.lsp.buf.declaration()
                     end, "Goto Declaration") -- WARN: this is different to goto definition, this is goto declaration
@@ -133,14 +137,14 @@ return {
         dependencies = {
             {
                 "nvimtools/none-ls.nvim",
+                event = { "BufReadPost", "BufWritePost", "BufNewFile" },
 
                 opts = {
                     sources = {
                         -- anything not supported by mason.
-                    }
-                }
+                    },
+                },
             },
         },
-
     },
 }
