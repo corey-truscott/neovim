@@ -6,7 +6,7 @@ return {
         {
             "<leader>vbg",
             "<CMD>VimBeGood<CR>",
-            desc = "Vim Bee Good",
+            desc = "Vim Be Good",
         },
     },
 }
