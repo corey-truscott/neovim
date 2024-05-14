@@ -127,7 +127,7 @@ return {
                 function()
                     vim.lsp.buf.format()
                 end,
-                desc = "Format",
+                desc = "LSP: Format",
             },
         },
         opts = {
