@@ -7,7 +7,7 @@ return {
 		{ "nvim-telescope/telescope-ui-select.nvim" },
 		{ "nvim-tree/nvim-web-devicons" },
 	},
-    opts = {},
+	opts = {},
 	keys = {
 		{
 			"<leader>pv",
@@ -42,7 +42,7 @@ return {
 			function()
 				require("telescope.builtin").keymaps()
 			end,
-            desc = "Search keymaps",
+			desc = "Search keymaps",
 		},
 		{
 			"<leader>pr",
@@ -51,13 +51,13 @@ return {
 			end,
 			desc = "Search old files",
 		},
-        {
-            "<leader>p*",
-            function ()
-                require("telescope.builtin").grep_string({ search = vim.fn.expand("<cword>") })
-            end,
-            desc = "Search word under cursor"
-        },
+		{
+			"<leader>p*",
+			function()
+				require("telescope.builtin").grep_string({ search = vim.fn.expand("<cword>") })
+			end,
+			desc = "Search word under cursor",
+		},
 		{ "<leader>pt", "<cmd>TodoTelescope<cr>", desc = "Search Todo comments" },
 	},
 }
