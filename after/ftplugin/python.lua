@@ -9,7 +9,7 @@ local i = ls.insert_node
 local fmt = require("luasnip.extras.fmt").fmt
 
 ls.add_snippets("python", {
-    s("ifm", fmt('def main():\n\t{}\n\nif __name__ == "__main__":\n\tmain()', { i(1, "assert False") })),
+    s("ifm", fmt('def main():\n\t{}\n\nif __name__ == "__main__":\n\tmain()', { i(1, "raise AssertionError()") })),
     -- produces this:
     -- def main():
     --     {$1 assert False}
