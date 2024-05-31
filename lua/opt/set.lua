@@ -18,7 +18,7 @@ vim.opt.backup = false
 vim.opt.writebackup = false
 
 -- adds persistent undo
-vim.opt.undodir = os.getenv("HOME") .. "/.config/nvim/undodir"
+vim.opt.undodir = vim.env.XDG_CONFIG_HOME or vim.env.HOME .. "/.config"
 vim.opt.undofile = true
 
 -- adds highlighted search, incremental search, and removes case sensetive search
