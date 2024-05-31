@@ -1,4 +1,4 @@
 return {
-	"svban/YankAssassin.vim",
-	event = "VeryLazy",
+    "svban/YankAssassin.vim",
+    event = "VeryLazy",
 }

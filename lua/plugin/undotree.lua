@@ -1,14 +1,13 @@
 return {
-	"jiaoshijie/undotree",
-	lazy = true,
-	config = true,
-	keys = {
-		{
-			"<leader>u",
-			function()
-				require("undotree").toggle()
-			end,
-			desc = "Undotree",
-		},
-	},
+    "mbbill/undotree",
+    cmd = "UndotreeToggle",
+    keys = {
+        {
+            "<leader>u",
+            function()
+                vim.cmd("UndotreeToggle")
+            end,
+            desc = "Undotree",
+        },
+    },
 }

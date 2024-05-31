@@ -1,6 +1,4 @@
--- adds relativenumber lines on the side
--- setting number and relative number means that the real line number isdst
--- displayed for the line you are on
+-- relative line numbers
 vim.opt.number = true
 vim.opt.relativenumber = true
 
@@ -47,7 +45,7 @@ vim.opt.updatetime = 50
 -- makes vim clipboard the same as system
 vim.opt.clipboard = "unnamedplus"
 
--- marks conceal level as 0
+-- marks conceal level as 3
 vim.opt.conceallevel = 3
 
 -- encodes files in utf-8
@@ -56,11 +54,10 @@ vim.opt.fileencoding = "utf-8"
 -- enables mouse
 vim.opt.mouse = "a"
 
--- floating window pop up height
+-- floating window pop up height (completion only provides 10 options without scrolling)
 vim.opt.pumheight = 10
 
 -- removes the mode from the status line,
--- this is handled by lualine instead
 vim.opt.showmode = false
 
 -- changes where panes split to
@@ -79,11 +76,28 @@ vim.opt.colorcolumn = "80"
 -- preview substitution
 vim.opt.inccommand = "split"
 
+-- stop o/O from inserting a new comment on the next line
+vim.opt.formatoptions:remove("o")
+
 -- flash text that gets yanked
 vim.api.nvim_create_autocmd("TextYankPost", {
-	desc = "Highlight when yanking (copying) text",
-	group = vim.api.nvim_create_augroup("highlight-yank", { clear = true }),
-	callback = function()
-		vim.highlight.on_yank()
-	end,
+    desc = "Highlight when yanking (copying) text",
+    group = vim.api.nvim_create_augroup("highlight-yank", { clear = true }),
+    callback = function()
+        vim.highlight.on_yank({
+            timeout = 100,
+        })
+    end,
+})
+
+-- create directory when saving a file if it doesnt already exist
+vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+    group = vim.api.nvim_create_augroup("Auto create directories", { clear = true }),
+    callback = function(event)
+        if event.match:match("^%w%w+:[\\/][\\/]") then
+            return
+        end
+        local file = vim.uv.fs_realpath(event.match) or event.match
+        vim.fn.mkdir(vim.fn.fnamemodify(file, ":p:h"), "p")
+    end,
 })
