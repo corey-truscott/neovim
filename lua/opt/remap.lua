@@ -37,14 +37,38 @@ vim.keymap.set("n", "<C-l>", "<cmd>wincmd l<cr>")
 -- clear highlight search on escsape
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<cr>")
 
+local centeredCursor = {}
+centeredCursor.pick = function(choice, default, alternate)
+    -- true: default
+    -- false: alternate
+    -- other: print "Invalid option"
+    if choice then
+        vim.opt.scrolloff = default
+    elseif not choice then
+        vim.opt.scrolloff = alternate
+        vim.cmd("exe 'normal! zz'")
+    else
+        vim.print("Invalid option")
+    end
+end
+
+centeredCursor.is_alternate = function(alternate)
+    if vim.o.scrolloff == alternate then
+        return true
+    else
+        return false
+    end
+end
+
 local defaultScrollOff = vim.o.scrolloff
 local alternateScrollOff = 999
-local scrollOff = { defaultScrollOff, alternateScrollOff }
 
 vim.keymap.set("n", "<leader>cc", function()
-    scrollOff[1], scrollOff[2] = scrollOff[2], scrollOff[1]
-    vim.opt.scrolloff = scrollOff[1]
-    if scrollOff[1] == alternateScrollOff then
-        vim.cmd("exe 'normal! zz'")
+    if centeredCursor.is_alternate(alternateScrollOff) then
+        centeredCursor.pick(true, defaultScrollOff, alternateScrollOff)
+        -- chooses alternate
+    else
+        centeredCursor.pick(false, defaultScrollOff, alternateScrollOff)
+        -- chooses default
     end
 end, { desc = "Toggle centered cursor" })
