@@ -41,11 +41,6 @@ return {
             },
 
             {
-                "folke/neodev.nvim",
-                opts = {},
-            },
-
-            {
                 "j-hui/fidget.nvim",
                 opts = {},
             },
@@ -68,135 +63,85 @@ return {
                 },
             },
         },
-        keys = {
-            {
-                "<leader>M",
-                vim.cmd.Mason,
-                desc = "LSP: Mason",
-            },
+        keys = function()
+            local keys = {}
 
-            {
-                "]d",
-                function()
-                    vim.diagnostic.goto_next()
-                end,
-                desc = "LSP: Next diagnostic",
-            },
+            --- add a key mapping.
+            --- @param map string: the key mapping
+            --- @param command function | string: the function or command to execute
+            --- @param description string: the description of the key mapping
+            local addKey = function(map, command, description)
+                table.insert(keys, {
+                    map,
+                    command,
+                    desc = "LSP: " .. description, -- desc is the name required by lazy
+                })
+            end
 
-            {
-                "[d",
-                function()
-                    vim.diagnostic.goto_prev()
-                end,
-                desc = "LSP: Previous diagnostic",
-            },
+            addKey("<leader>M", vim.cmd.Mason, "Mason")
 
-            {
-                "gd",
-                function()
-                    vim.lsp.buf.definition()
-                end,
-                desc = "LSP: Goto Definition",
-            },
+            addKey("]d", function()
+                vim.diagnostic.goto_next()
+            end, "Next diagnostic")
 
-            {
-                "gr",
-                function()
-                    vim.lsp.buf.references()
-                end,
-                desc = "LSP: Goto References",
-            },
+            addKey("[d", function()
+                vim.diagnostic.goto_prev()
+            end, "Previous diagnostic")
 
-            {
-                "gI",
-                function()
-                    vim.lsp.buf.implementation()
-                end,
-                desc = "LSP: Goto Implementation",
-            },
+            addKey("gd", function()
+                vim.lsp.buf.definition()
+            end, "Goto Definition")
 
-            {
-                "<leader>D",
-                function()
-                    vim.lsp.buf.lsp_type_definition()
-                end,
-                desc = "LSP: Type Definition",
-            },
+            addKey("gr", function()
+                vim.lsp.buf.references()
+            end, "Goto References")
 
-            {
-                "<leader>ds",
-                function()
-                    vim.lsp.buf.document_symbol()
-                end,
-                desc = "LSP: Document Symbols",
-            },
+            addKey("gI", function()
+                vim.lsp.buf.implementation()
+            end, "Goto Implementation")
 
-            {
-                "<leader>rn",
-                function()
-                    vim.lsp.buf.rename()
-                end,
-                desc = "LSP: Rename",
-            },
+            addKey("<leader>D", function()
+                vim.lsp.buf.type_definition()
+            end, "Type Definition")
 
-            {
-                "<leader>ca",
-                function()
-                    vim.lsp.buf.code_action()
-                end,
-                desc = "LSP: Code Action",
-            },
+            addKey("<leader>ds", function()
+                vim.lsp.buf.document_symbol()
+            end, "Document Symbols")
 
-            {
-                "K",
-                function()
-                    vim.lsp.buf.hover()
-                end,
-                desc = "LSP: Hover Documentation",
-            },
+            addKey("<leader>rn", function()
+                vim.lsp.buf.rename()
+            end, "Rename")
 
-            {
-                "<leader>h",
-                function()
-                    vim.lsp.buf.signature_help()
-                end,
-                desc = "LSP: Signature help",
-            },
+            addKey("<leader>ca", function()
+                vim.lsp.buf.code_action()
+            end, "Code Action")
 
-            {
-                "gD",
-                function()
-                    vim.lsp.buf.declaration()
-                end,
-                desc = "LSP: Goto Declaration", -- WARN: this is different to goto definition, this is goto declaration
-            },
+            addKey("K", function()
+                vim.lsp.buf.hover()
+            end, "Hover Documentation")
 
-            {
-                "<leader>f",
-                function()
-                    vim.lsp.buf.format()
-                end,
-                desc = "LSP: Format",
-            },
+            addKey("<leader>h", function()
+                vim.lsp.buf.signature_help()
+            end, "Signature help")
 
-            {
-                "<leader>ih",
-                function()
-                    ---@diagnostic disable-next-line: missing-parameter
-                    vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
-                end,
-                desc = "LSP: Inlay Hints",
-            },
+            addKey("gD", function()
+                vim.lsp.buf.declaration()
+            end, "Goto Declaration") -- WARN: this is different to goto definition, this is goto declaration
 
-            {
-                "<leader>cl",
-                function()
-                    ---@diagnostic disable-next-line: missing-parameter
-                    vim.lsp.codelens.run()
-                end,
-                desc = "LSP: Codelens",
-            },
-        },
+            addKey("<leader>f", function()
+                vim.lsp.buf.format()
+            end, "Format")
+
+            addKey("<leader>ih", function()
+                vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+            end, "Inlay Hints")
+
+            addKey("<leader>cl", function()
+                vim.lsp.codelens.run()
+            end, "Codelens")
+
+            return keys
+        end,
 
         config = function()
             local diagnostics_icons = {
@@ -237,5 +182,11 @@ return {
                 },
             })
         end,
+    },
+
+    {
+        "folke/lazydev.nvim",
+        ft = "lua",
+        opts = {},
     },
 }

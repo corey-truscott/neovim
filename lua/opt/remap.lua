@@ -22,9 +22,6 @@ vim.keymap.set("n", "<C-b>", "<C-b>zz")
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 
--- change Q to make lines equal
-vim.keymap.set("n", "Q", "gql")
-
 -- Open Lazy
 vim.keymap.set("n", "<leader>L", "<cmd>Lazy<cr>", { desc = "Lazy" })
 
@@ -66,9 +63,11 @@ local alternateScrollOff = 999
 vim.keymap.set("n", "<leader>cc", function()
     if centeredCursor.is_alternate(alternateScrollOff) then
         centeredCursor.pick(true, defaultScrollOff, alternateScrollOff)
+        vim.print("scrolloff: " .. alternateScrollOff)
         -- chooses alternate
     else
         centeredCursor.pick(false, defaultScrollOff, alternateScrollOff)
+        vim.print("scrolloff: " .. defaultScrollOff)
         -- chooses default
     end
 end, { desc = "Toggle centered cursor" })
