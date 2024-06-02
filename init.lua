@@ -1,17 +1,22 @@
 if vim.fn.has("nvim-0.10.0") == 0 then
     vim.api.nvim_echo({
-        { "Configuration requires Neovim >= 0.10.0\n", "ErrorMsg" },
-        { "Press any key to exit", "MoreMsg" },
+        { "the configuration requires neovim version >= 0.10.0\n", "ErrorMsg" },
+        {
+            "update to a newer version of neovim\n",
+            "WarningMsg",
+        },
+        { "press any key to exit...",                              "MoreMsg" },
     }, true, {})
+
     vim.fn.getchar()
-    vim.cmd([[quit]])
-    return {}
+    vim.cmd.quit()
 end
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 local lazyrepo = "https://github.com/folke/lazy.nvim.git"
+---@diagnostic disable-next-line: undefined-field
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
-    print("Downloading lazy.nvim, please wait")
+    print("Downloading lazy.nvim " .. "(" .. lazyrepo .. ")")
     vim.fn.system({
         "git",
         "clone",
@@ -21,7 +26,7 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
         lazypath,
     })
 end
----
+
 ---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
 

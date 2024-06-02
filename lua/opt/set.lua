@@ -92,7 +92,10 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 
 -- create directory when saving a file if it doesnt already exist
 vim.api.nvim_create_autocmd({ "BufWritePre" }, {
-    group = vim.api.nvim_create_augroup("Auto create directories", { clear = true }),
+    group = vim.api.nvim_create_augroup(
+        "Auto create directories",
+        { clear = true }
+    ),
     callback = function(event)
         if event.match:match("^%w%w+:[\\/][\\/]") then
             return

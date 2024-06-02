@@ -75,7 +75,9 @@ return {
         {
             "<leader>p*",
             function()
-                require("telescope.builtin").grep_string({ search = vim.fn.expand("<cword>") })
+                require("telescope.builtin").grep_string({
+                    search = vim.fn.expand("<cword>"),
+                })
             end,
             desc = "Search word under cursor",
         },
@@ -86,6 +88,10 @@ return {
             end,
             desc = "Search document symbols",
         },
-        { "<leader>pt", "<cmd>TodoTelescope<cr>", desc = "Search Todo comments" },
+        {
+            "<leader>pt",
+            "<cmd>TodoTelescope<cr>",
+            desc = "Search Todo comments",
+        },
     },
 }

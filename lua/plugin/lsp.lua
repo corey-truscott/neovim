@@ -70,7 +70,7 @@ return {
             --- @param map string: the key mapping
             --- @param command function | string: the function or command to execute
             --- @param description string: the description of the key mapping
-            local addKey = function(map, command, description)
+            local add_key = function(map, command, description)
                 table.insert(keys, {
                     map,
                     command,
@@ -78,65 +78,66 @@ return {
                 })
             end
 
-            addKey("<leader>M", vim.cmd.Mason, "Mason")
+            add_key("<leader>M", vim.cmd.Mason, "Mason")
 
-            addKey("]d", function()
+            add_key("]d", function()
                 vim.diagnostic.goto_next()
             end, "Next diagnostic")
 
-            addKey("[d", function()
+            add_key("[d", function()
                 vim.diagnostic.goto_prev()
             end, "Previous diagnostic")
 
-            addKey("gd", function()
+            add_key("gd", function()
                 vim.lsp.buf.definition()
             end, "Goto Definition")
 
-            addKey("gr", function()
+            add_key("gr", function()
                 vim.lsp.buf.references()
             end, "Goto References")
 
-            addKey("gI", function()
+            add_key("gI", function()
                 vim.lsp.buf.implementation()
             end, "Goto Implementation")
 
-            addKey("<leader>D", function()
+            add_key("<leader>D", function()
                 vim.lsp.buf.type_definition()
             end, "Type Definition")
 
-            addKey("<leader>ds", function()
+            add_key("<leader>ds", function()
                 vim.lsp.buf.document_symbol()
             end, "Document Symbols")
 
-            addKey("<leader>rn", function()
+            add_key("<leader>rn", function()
                 vim.lsp.buf.rename()
             end, "Rename")
 
-            addKey("<leader>ca", function()
+            add_key("<leader>ca", function()
                 vim.lsp.buf.code_action()
             end, "Code Action")
 
-            addKey("K", function()
+            add_key("K", function()
                 vim.lsp.buf.hover()
             end, "Hover Documentation")
 
-            addKey("<leader>h", function()
+            add_key("<leader>h", function()
                 vim.lsp.buf.signature_help()
             end, "Signature help")
 
-            addKey("gD", function()
+            add_key("gD", function()
                 vim.lsp.buf.declaration()
             end, "Goto Declaration") -- WARN: this is different to goto definition, this is goto declaration
 
-            addKey("<leader>f", function()
+            add_key("<leader>f", function()
                 vim.lsp.buf.format()
             end, "Format")
 
-            addKey("<leader>ih", function()
+            add_key("<leader>ih", function()
+                ---@diagnostic disable-next-line: missing-parameter
                 vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
             end, "Inlay Hints")
 
-            addKey("<leader>cl", function()
+            add_key("<leader>cl", function()
                 vim.lsp.codelens.run()
             end, "Codelens")
 
@@ -163,20 +164,31 @@ return {
             })
 
             local capabilities = vim.lsp.protocol.make_client_capabilities()
-            capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
+            capabilities = vim.tbl_deep_extend(
+                "force",
+                capabilities,
+                require("cmp_nvim_lsp").default_capabilities()
+            )
 
             require("mason").setup()
             if next(servers) ~= nil then
                 local ensure_installed = vim.tbl_keys(servers or {})
                 vim.list_extend(ensure_installed, formatters or {})
-                require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
+                require("mason-tool-installer").setup({
+                    ensure_installed = ensure_installed,
+                })
             end
 
             require("mason-lspconfig").setup({
                 handlers = {
                     function(server_name)
                         local server = servers[server_name] or {}
-                        server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
+                        server.capabilities = vim.tbl_deep_extend(
+                            "force",
+                            {},
+                            capabilities,
+                            server.capabilities or {}
+                        )
                         require("lspconfig")[server_name].setup(server)
                     end,
                 },
