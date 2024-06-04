@@ -74,7 +74,7 @@ return {
                 table.insert(keys, {
                     map,
                     command,
-                    desc = "LSP: " .. description, -- desc is the name required by lazy
+                    desc = description .. " (LSP)", -- desc is the name required by lazy
                 })
             end
 
