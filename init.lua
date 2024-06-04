@@ -1,14 +1,9 @@
-if vim.fn.has("nvim-0.10.0") == 0 then
-    -- stylua: ignore
-    vim.api.nvim_echo({
-        { "the configuration requires neovim version >= 0.10.0\n", "ErrorMsg" },
-        { "update to a newer version of neovim\n",                 "WarningMsg", },
-        { "press any key to exit...",                              "MoreMsg" },
-    }, true, {})
+-- checks if neovim version is above 0.10
+require("util.check_version")
 
-    vim.fn.getchar()
-    vim.cmd.quit()
-end
+-- require options
+require("opt.set")
+require("opt.remap")
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 local lazyrepo = "https://github.com/folke/lazy.nvim.git"
@@ -24,13 +19,8 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
         lazypath,
     })
 end
-
 ---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
-
--- require options
-require("opt.set")
-require("opt.remap")
 
 -- start lazy
 require("lazy").setup({ import = "plugin" }, {
