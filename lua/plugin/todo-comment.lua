@@ -20,8 +20,12 @@ return {
         },
         {
             "<leader>tf",
-            function() -- TODO: CHECK IS OPEN
-                vim.cmd(":TodoTrouble")
+            function()
+                if require("trouble").is_open() then
+                    require("trouble").close()
+                else
+                    vim.cmd(":TodoTrouble")
+                end
             end,
             desc = "Todo (Trouble)",
         },
