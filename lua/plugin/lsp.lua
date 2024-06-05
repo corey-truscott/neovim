@@ -104,7 +104,7 @@ return {
                 vim.lsp.buf.type_definition()
             end, "Type Definition")
 
-            add_key("<leader>ds", function()
+            add_key("<leader>gds", function()
                 vim.lsp.buf.document_symbol()
             end, "Document Symbols")
 
