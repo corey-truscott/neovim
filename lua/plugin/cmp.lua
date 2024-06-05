@@ -27,7 +27,7 @@ return { -- Autocompletion
         "hrsh7th/cmp-path",
         "hrsh7th/cmp-buffer",
     },
-    config = function()
+    config = function(_, opts)
         -- see `:help cmp`
         local cmp = require("cmp")
         local luasnip = require("luasnip")
@@ -64,6 +64,13 @@ return { -- Autocompletion
                 { name = "path" },
                 { name = "buffer" },
             },
+        })
+
+        -- add completions from lazydev
+        opts.sources = opts.sources or {}
+        table.insert(opts.sources, {
+            name = "lazydev",
+            group_index = 0,
         })
     end,
 }
