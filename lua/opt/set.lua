@@ -79,6 +79,9 @@ vim.opt.inccommand = "split"
 -- stop o/O from inserting a new comment on the next line
 vim.opt.formatoptions:remove("o")
 
+-- allow cursor to move where there is no text in visual block mode
+vim.opt.virtualedit = "block"
+
 -- flash text that gets yanked
 vim.api.nvim_create_autocmd("TextYankPost", {
     desc = "Highlight when yanking (copying) text",
@@ -100,6 +103,7 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
         if event.match:match("^%w%w+:[\\/][\\/]") then
             return
         end
+        ---@diagnostic disable-next-line: undefined-field
         local file = vim.uv.fs_realpath(event.match) or event.match
         vim.fn.mkdir(vim.fn.fnamemodify(file, ":p:h"), "p")
     end,
