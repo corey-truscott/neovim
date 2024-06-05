@@ -1,15 +1,5 @@
---
--- if you want to ensure daps are installed, you can
--- list them here. just follow how they are formatted.
---
--- otherwise, use :DapInstall or :Mason to install them, but they wont
--- carry over if you copy your configuration to another computer.
---
-
-local ensure_installed = {
-    -- "debugpy",
-    -- "delve",
-}
+-- go to lua/ensure_installed/init.lua to change what is automatically installed
+local install = require("ensure_installed")
 
 return {
     "mfussenegger/nvim-dap",
@@ -19,7 +9,7 @@ return {
             "jay-babu/mason-nvim-dap.nvim",
             dependencies = { "williamboman/mason.nvim" },
             cmd = { "DapInstall", "DapUninstall" },
-            opts = { ensure_installed = ensure_installed or {}, handlers = {} },
+            opts = { ensure_installed = install.debugger or {}, handlers = {} },
         },
 
         {

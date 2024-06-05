@@ -1,32 +1,5 @@
---
--- if you want to ensure lsp servers or formatters are installed, you can
--- list them here. Just follow how they are formatted.
---
--- otherwise, use :Mason or :MasonInstall to install them, but they wont
--- carry over if you copy your configuration to another computer.
---
-
-local servers = {
-    -- clangd = {},
-    -- gopls = {},
-    -- html = {},
-    -- jsonls = {},
-    -- marksman = {},
-    -- pyright = {},
-    -- rust_analyzer = {},
-    -- lua_ls = {},
-}
-
-local formatters = {
-    -- "stylua",
-    -- "black",
-    -- "cbfmt",
-    -- "gofumpt",
-    -- "golines",
-    -- "isort",
-    -- "mdformat",
-    -- "shfmt",
-}
+-- go to lua/ensure_installed/init.lua to change what is automatically installed
+local install = require("ensure_installed")
 
 return {
     {
@@ -48,10 +21,15 @@ return {
             {
                 "jay-babu/mason-null-ls.nvim",
                 event = { "BufReadPost", "BufWritePost", "BufNewFile" },
-                opts = {
-                    automatic_installation = false,
-                    handlers = {},
-                },
+                opts = function()
+                    local opts = {
+                        automatic_installation = false,
+                        handlers = {},
+                    }
+                    opts.ensure_installed = install.formatters
+
+                    return opts
+                end,
             },
 
             {
@@ -171,9 +149,8 @@ return {
             )
 
             require("mason").setup()
-            if next(servers) ~= nil then
-                local ensure_installed = vim.tbl_keys(servers or {})
-                vim.list_extend(ensure_installed, formatters or {})
+            if next(install.server) ~= nil then
+                local ensure_installed = vim.tbl_keys(install.server or {})
                 require("mason-tool-installer").setup({
                     ensure_installed = ensure_installed,
                 })
@@ -182,7 +159,7 @@ return {
             require("mason-lspconfig").setup({
                 handlers = {
                     function(server_name)
-                        local server = servers[server_name] or {}
+                        local server = install.server[server_name] or {}
                         server.capabilities = vim.tbl_deep_extend(
                             "force",
                             {},
@@ -196,9 +173,9 @@ return {
         end,
     },
 
-    {
-        "folke/lazydev.nvim",
-        ft = "lua",
-        opts = {},
-    },
+    -- {
+    --     "folke/lazydev.nvim",
+    --     ft = "lua",
+    --     opts = {},
+    -- },
 }
