@@ -26,7 +26,7 @@ return {
                         automatic_installation = false,
                         handlers = {},
                     }
-                    opts.ensure_installed = install.formatters
+                    opts.ensure_installed = install.formatters or {}
 
                     return opts
                 end,
