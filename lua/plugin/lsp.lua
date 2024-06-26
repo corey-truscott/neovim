@@ -1,5 +1,5 @@
 -- go to lua/ensure_installed/init.lua to change what is automatically installed
-local install = require("ensure_installed")
+local ensure = require("user.ensure_installed")
 
 return {
     {
@@ -21,15 +21,11 @@ return {
             {
                 "jay-babu/mason-null-ls.nvim",
                 event = { "BufReadPost", "BufWritePost", "BufNewFile" },
-                opts = function()
-                    local opts = {
-                        automatic_installation = false,
-                        handlers = {},
-                    }
-                    opts.ensure_installed = install.formatters or {}
-
-                    return opts
-                end,
+                opts = {
+                    automatic_installation = false,
+                    handlers = {},
+                    ensure_installed = ensure.formatters or {},
+                },
             },
 
             {
@@ -149,17 +145,17 @@ return {
             )
 
             require("mason").setup()
-            if next(install.server) ~= nil then
-                local ensure_installed = vim.tbl_keys(install.server or {})
-                require("mason-tool-installer").setup({
-                    ensure_installed = ensure_installed,
-                })
-            end
+
+            local ensure_installed = vim.tbl_keys(ensure.server or {})
+            vim.list_extend(ensure_installed, {})
+            require("mason-tool-installer").setup({
+                ensure_installed = ensure_installed,
+            })
 
             require("mason-lspconfig").setup({
                 handlers = {
                     function(server_name)
-                        local server = install.server[server_name] or {}
+                        local server = ensure.server[server_name] or {}
                         server.capabilities = vim.tbl_deep_extend(
                             "force",
                             {},

@@ -1,3 +1,6 @@
+-- go to lua/ensure_installed/init.lua to change what is automatically installed
+local ensure = require("user.ensure_installed")
+
 return {
     "nvim-treesitter/nvim-treesitter",
     version = false,
@@ -7,17 +10,15 @@ return {
     dependencies = {
         {
             "windwp/nvim-ts-autotag",
-            -- event = { "BufReadPost", "BufWritePost", "BufNewFile" },
             opts = {},
         },
         {
             "https://github.com/folke/ts-comments.nvim",
             opts = {},
-            event = { "BufReadPost", "BufWritePost", "BufNewFile" },
         },
     },
     opts = {
-        ensure_installed = { "comment", "markdown_inline" },
+        ensure_installed = ensure.syntax,
         auto_install = true,
         highlight = {
             enable = true,

@@ -1,5 +1,5 @@
 -- go to lua/ensure_installed/init.lua to change what is automatically installed
-local install = require("ensure_installed")
+local ensure = require("user.ensure_installed")
 
 return {
     "mfussenegger/nvim-dap",
@@ -9,7 +9,7 @@ return {
             "jay-babu/mason-nvim-dap.nvim",
             dependencies = { "williamboman/mason.nvim" },
             cmd = { "DapInstall", "DapUninstall" },
-            opts = { ensure_installed = install.debugger or {}, handlers = {} },
+            opts = { ensure_installed = ensure.debugger or {}, handlers = {} },
         },
 
         {
