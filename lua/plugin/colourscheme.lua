@@ -56,6 +56,23 @@ local colourscheme = {
             vim.cmd.colorscheme("catppuccin")
         end,
     },
+
+    rosepine = {
+        "rose-pine/neovim",
+        name = "rose-pine",
+        priority = 1000,
+        lazy = false,
+        opts = {
+            styles = {
+                bold = true,
+                italic = true,
+                transparency = false,
+            },
+        },
+        init = function()
+            vim.cmd.colorscheme("rose-pine")
+        end
+    },
 }
 
-return colourscheme.nightfox
+return colourscheme.rosepine
