@@ -73,6 +73,15 @@ local colourscheme = {
             vim.cmd.colorscheme("rose-pine")
         end
     },
+    moonfly = {
+        "bluz71/vim-moonfly-colors",
+        name = "moonfly",
+        priority = 1000,
+        lazy = false,
+        init = function()
+            vim.cmd.colorscheme("moonfly")
+        end
+    },
 }
 
-return colourscheme.rosepine
+return colourscheme.moonfly

@@ -3,9 +3,9 @@ local ensure = require("user.ensure_installed")
 
 return {
     "nvim-treesitter/nvim-treesitter",
+    branch = "main",
     version = false,
-    event = { "BufReadPost", "BufWritePost", "BufNewFile" },
-    lazy = vim.fn.argc(-1) == 0, -- load treesitter early when opening a file from the cmdline
+    lazy = false,
     build = ":TSUpdate",
     dependencies = {
         {

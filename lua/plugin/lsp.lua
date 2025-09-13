@@ -4,7 +4,8 @@ local ensure = require("user.ensure_installed")
 return {
     {
         "neovim/nvim-lspconfig",
-        event = { "BufReadPost", "BufWritePost", "BufNewFile" },
+        -- event = { "BufReadPost", "BufWritePost", "BufNewFile" },
+        lazy = false,
         dependencies = {
             "williamboman/mason.nvim",
             "williamboman/mason-lspconfig.nvim",
@@ -126,10 +127,18 @@ return {
                 Info = " ",
             }
 
+            local signs = { text = {}, texthl = {}, numhl = {} }
             for type, icon in pairs(diagnostics_icons) do
                 local hl = "DiagnosticSign" .. type
-                vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+                local severity = vim.diagnostic.severity[string.upper(type)]
+                signs.text[severity] = icon
+                signs.texthl[severity] = hl
+                signs.numhl[severity] = hl
             end
+
+            vim.diagnostic.config({
+                signs = signs,
+            })
 
             vim.api.nvim_create_autocmd({ "LspAttach" }, {
                 callback = function()
