@@ -56,11 +56,11 @@ return {
             add_key("<leader>M", vim.cmd.Mason, "Mason")
 
             add_key("]d", function()
-                vim.diagnostic.goto_next()
+                vim.diagnostic.jump({count=1, float=true})
             end, "Next diagnostic")
 
             add_key("[d", function()
-                vim.diagnostic.goto_prev()
+                vim.diagnostic.jump({count=-1, float=true})
             end, "Previous diagnostic")
 
             add_key("gd", function()
