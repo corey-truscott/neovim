@@ -1,4 +1,4 @@
--- checks if neovim version is above 0.10
+-- checks if neovim version is above 0.11
 require("util.check_version")
 
 -- require options
