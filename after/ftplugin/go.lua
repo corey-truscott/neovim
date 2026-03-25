@@ -8,7 +8,7 @@ local i = ls.insert_node
 local fmt = require("luasnip.extras.fmt").fmt
 
 ls.add_snippets("go", {
-    s("ifer", fmt("if err != nil {{\n\t{}\n}}", { i(1, "return err") })),
+    s("ifer", fmt("if err != nil {{\n\t{}\n}}", { i(1, "panic(err)") })),
     -- produces this:
     -- if err != nil {
     --    {$1 return err}
