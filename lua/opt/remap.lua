@@ -24,8 +24,8 @@ vim.keymap.set("n", "<C-b>", "<C-b>zz", { desc = "Up a page" })
 vim.keymap.set("n", "n", "nzzzv", { desc = "Next item" })
 vim.keymap.set("n", "N", "Nzzzv", { desc = "Previous item" })
 
--- Open Lazy
-vim.keymap.set("n", "<leader>L", "<cmd>Lazy<cr>", { desc = "Lazy" })
+-- Open mason
+vim.keymap.set("n", "<leader>M", "<cmd>Mason<cr>", { desc = "Mason" })
 
 -- allows for pane navigation via <C-(h,j,k,l)>
 vim.keymap.set("n", "<C-h>", "<cmd>wincmd h<cr>", { desc = "Right pane" })
