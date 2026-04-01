@@ -19,7 +19,7 @@ vim.opt.backup = false
 vim.opt.writebackup = false
 
 -- adds persistent undo
-vim.opt.undodir = vim.fn.stdpath("config") .. "/undodir"
+vim.opt.undodir = vim.fn.stdpath("data") .. "/undodir"
 vim.opt.undofile = true
 
 -- adds highlighted search, incremental search, and removes case sensetive search
