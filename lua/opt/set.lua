@@ -41,7 +41,7 @@ vim.opt.signcolumn = "yes"
 vim.opt.isfname:append("@-@")
 
 -- updates autocompletion faster
-vim.opt.updatetime = 50
+vim.opt.updatetime = 300
 
 -- makes vim clipboard the same as system
 vim.opt.clipboard = "unnamedplus"
