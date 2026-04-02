@@ -4,7 +4,7 @@ local colorscheme = {
             "https://github.com/Aejkatappaja/sora",
         })
 
-        vim.cmd.colorscheme('sora')
+        vim.cmd.colorscheme("sora")
     end,
 
     rosepine = function()
@@ -12,7 +12,7 @@ local colorscheme = {
             "https://github.com/rose-pine/neovim",
         })
 
-        vim.cmd.colorscheme('rose-pine')
+        vim.cmd.colorscheme("rose-pine")
     end,
 
     moonfly = function()
@@ -20,7 +20,15 @@ local colorscheme = {
             "https://github.com/bluz71/vim-moonfly-colors",
         })
 
-        vim.cmd.colorscheme('moonfly')
+        vim.cmd.colorscheme("moonfly")
+    end,
+
+    terafox = function()
+        vim.pack.add({
+            "https://github.com/EdenEast/nightfox.nvim",
+        })
+
+        vim.cmd.colorscheme("terafox")
     end,
 }
 

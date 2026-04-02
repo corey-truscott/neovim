@@ -2,6 +2,7 @@ vim.pack.add({
     "https://github.com/stevearc/conform.nvim",
 })
 
+-- HACK:
 -- conform looks in $PATH for formatters,
 -- so we will just add the location of
 -- formatters installed by mason to the $PATH
