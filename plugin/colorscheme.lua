@@ -24,4 +24,4 @@ local colorscheme = {
     end,
 }
 
-colorscheme.sora()
+colorscheme.moonfly()

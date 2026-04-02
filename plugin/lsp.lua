@@ -15,14 +15,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end,
 })
 
-vim.keymap.set("n", "<leader>ih", function()
-    vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
-end, { desc = "Inlay Hints" })
-
-vim.keymap.set("n", "grc", function()
-    vim.lsp.document_color.color_presentation()
-end, { desc = "Change colour presentation" })
-
 vim.diagnostic.config({
     update_in_insert = false,
     severity_sort = true,
@@ -34,3 +26,11 @@ vim.diagnostic.config({
 
     jump = { float = true },
 })
+
+vim.keymap.set("n", "<leader>ih", function()
+    vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+end, { desc = "Inlay Hints" })
+
+vim.keymap.set("n", "grc", function()
+    vim.lsp.document_color.color_presentation()
+end, { desc = "Change colour presentation" })
