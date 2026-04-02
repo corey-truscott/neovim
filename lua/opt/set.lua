@@ -44,7 +44,8 @@ vim.opt.isfname:append("@-@")
 vim.opt.updatetime = 300
 
 -- makes vim clipboard the same as system
-vim.opt.clipboard = "unnamedplus"
+-- scheduled after UiEnter because it can increase startup time
+vim.schedule(function() vim.o.clipboard = 'unnamedplus' end)
 
 -- marks conceal level as 3
 vim.opt.conceallevel = 3
