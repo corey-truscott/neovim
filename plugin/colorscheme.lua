@@ -1,4 +1,8 @@
 local colorscheme = {
+    default = function()
+        vim.cmd.colorscheme("default")
+    end,
+
     sora = function()
         vim.pack.add({
             "https://github.com/Aejkatappaja/sora",
@@ -29,6 +33,29 @@ local colorscheme = {
         })
 
         vim.cmd.colorscheme("terafox")
+    end,
+
+    gruvbox = function()
+        vim.pack.add({
+            "https://github.com/ellisonleao/gruvbox.nvim",
+        })
+
+        -- Default options:
+        require("gruvbox").setup({
+            contrast = "soft",
+            dim_inactive = false,
+            transparent_mode = false,
+        })
+
+        vim.cmd.colorscheme("gruvbox")
+    end,
+
+    kanagawa = function()
+        vim.pack.add({
+            "https://github.com/rebelot/kanagawa.nvim",
+        })
+
+        vim.cmd.colorscheme("kanagawa-lotus")
     end,
 }
 

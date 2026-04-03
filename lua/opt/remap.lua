@@ -45,19 +45,6 @@ vim.keymap.set("v", "<", "<gv", { desc = "Reindent while staying in visual mode"
 vim.keymap.set("v", ">", ">gv", { desc = "Reindent while staying in visual mode" })
 -- stylua: ignore end
 
-local default_scrolloff = vim.o.scrolloff
-local alternate_scrolloff = 999
-local scrolloff_is_default = true
-
-vim.keymap.set("n", "<leader>cc", function()
-    scrolloff_is_default = not scrolloff_is_default
-    if scrolloff_is_default then
-        vim.opt.scrolloff = alternate_scrolloff
-    else
-        vim.opt.scrolloff = default_scrolloff
-    end
-end, { desc = "Toggle centered cursor" })
-
 local function comment_above_or_below(lnum)
     local row, _ = unpack(vim.api.nvim_win_get_cursor(0))
     local comment_row = row + lnum
