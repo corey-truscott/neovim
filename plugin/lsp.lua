@@ -24,7 +24,7 @@ vim.diagnostic.config({
     virtual_text = true,
     virtual_lines = false,
 
-    jump = { float = true },
+    jump = { on_jump = true },
 })
 
 vim.keymap.set("n", "<leader>ih", function()

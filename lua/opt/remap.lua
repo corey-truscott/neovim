@@ -46,7 +46,7 @@ vim.keymap.set("v", ">", ">gv", { desc = "Reindent while staying in visual mode"
 -- stylua: ignore end
 
 local function comment_above_or_below(lnum)
-    local row, _ = unpack(vim.api.nvim_win_get_cursor(0))
+    local row, _ = table.unpack(vim.api.nvim_win_get_cursor(0))
     local comment_row = row + lnum
     local l_cms, r_cms = string.match(vim.bo.commentstring, "(.*)%%s(.*)")
     l_cms = vim.trim(l_cms)
