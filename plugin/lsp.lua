@@ -9,11 +9,12 @@ require("mason-lspconfig").setup({
     automatic_enable = true,
 })
 
-vim.api.nvim_create_autocmd("LspAttach", {
-    callback = function(args)
-        vim.lsp.inlay_hint.enable(true, { bufnr = args.buf })
-    end,
-})
+-- INFO: uncomment this for inlay hints by default
+-- vim.api.nvim_create_autocmd("LspAttach", {
+--     callback = function(args)
+--         vim.lsp.inlay_hint.enable(true, { bufnr = args.buf })
+--     end,
+-- })
 
 vim.diagnostic.config({
     update_in_insert = false,
