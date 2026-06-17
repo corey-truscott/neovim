@@ -13,7 +13,7 @@ vim.env.PATH = vim.fn.stdpath("data")
 
 require("conform").setup({
     formatters_by_ft = {
-        python = { "isort", "black" },
+        python = { "isort", "ruff" },
         --     lua = { "stylua" },
         --     -- Conform will run multiple formatters sequentially
         --     -- You can customize some of the format options for the filetype (:help conform.format)
