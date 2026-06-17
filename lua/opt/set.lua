@@ -45,7 +45,9 @@ vim.opt.updatetime = 300
 
 -- makes vim clipboard the same as system
 -- scheduled after UiEnter because it can increase startup time
-vim.schedule(function() vim.o.clipboard = 'unnamedplus' end)
+vim.schedule(function()
+    vim.o.clipboard = "unnamedplus"
+end)
 
 -- marks conceal level as 3
 vim.opt.conceallevel = 3
@@ -112,4 +114,4 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
 })
 
 -- experimental ui2
-require('vim._core.ui2').enable {}
+require("vim._core.ui2").enable({})

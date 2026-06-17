@@ -3,7 +3,7 @@ vim.pack.add({
     "https://github.com/stevearc/oil.nvim",
 })
 
-require('mini.icons').setup()
+require("mini.icons").setup()
 require("oil").setup({
     default_file_explorer = true,
     view_options = {
@@ -21,11 +21,6 @@ require("oil").setup({
     },
 })
 
-vim.keymap.set(
-    "n",
-    "-",
-    function()
-        require("oil").open_float()
-    end,
-    { desc = "Open file explorer (oil)" }
-)
+vim.keymap.set("n", "-", function()
+    require("oil").open_float()
+end, { desc = "Open file explorer (oil)" })
