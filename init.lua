@@ -1,7 +1,7 @@
-if vim.fn.has("nvim-0.12.0") == 0 then
+if vim.fn.has("nvim-0.13.0") == 0 then
     vim.api.nvim_echo({
         {
-            "Configuration requires Neovim >= 0.12.0, most stuff will probably break.\n",
+            "Configuration requires Neovim >= 0.13.0, most stuff will probably break.\n",
             "ErrorMsg",
         },
     }, true, {})
